@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% load course_tags %}
+{% block content %}
+    <!-- PAGE TITLE
+        ================================================== -->
+    <header class="py-8 py-md-10" style="background-image: none;">
+        <div class="container text-center py-xl-2">
+            <h1 class="display-4 fw-semi-bold mb-0">Shop Checkout</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-scroll justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a class="text-gray-800" href="#">
+                            Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item text-gray-800 active" aria-current="page">
+                        Shop Checkout
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!-- Img -->
+        <img class="d-none img-fluid" src="...html" alt="...">
+    </header>
+    
+    
+    <!-- SHOP CHECKOUT
+        ================================================== -->
+    <div class="container pb-6 pb-xl-10">
+        <form name="checkout" method="post" class="checkout woocommerce-checkout d-flex justify-content-center align-items-center" action="/payment/checkout/{{course.slug}}" >
+            {% csrf_token %}
+    
+            <div id="order_review" class="woocommerce-checkout-review-order">
+                <div class="woocommerce-checkout-review-order-inner">
+                    <h3 id="order_review_heading">Your order</h3>
+                    <table class="shop_table woocommerce-checkout-review-order-table">
+                        <thead>
+                            <tr>
+                                <th class="product-name">Product</th>
+                                <th class="product-total">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cart_item">
+                                <td class="product-name">
+                                    {{course.title}}
+                                </td>
+                                <td class="product-total">
+                                    <span class="woocommerce-Price-amount amount">
+                                        <span class="woocommerce-Price-currencySymbol">Rs&nbsp;</span>
+                                        {{course.price}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="cart-subtotal">
+                                <th>Discount</th>
+                                <td><span class="woocommerce-Price-amount amount">{{course.discount}}<span class="woocommerce-Price-currencySymbol">%</span></span></td>
+                            </tr>
+    
+                            <tr class="order-total">
+                                <th>Total</th>
+                                <td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">Rs&nbsp;</span>{% discount_calculation course.price course.discount %}</span></strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div id="payment" class="woocommerce-checkout-payment">
+                    <div class="form-row place-order d-flex justify-content-center align-items-center">
+                        <input type="text" class="form-control" name="token" placeholder="Token" />
+                        <input type="hidden" name="amount" value="{% discount_calculation course.price course.discount %}" /><br>
+                        <button type="submit" class="btn btn-primary btn-sm ml-4" type="submit" style="align-items: center;"><i class="fa fa-shopping-cart"
+                                aria-hidden="true" ></i> PLACE ORDER </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    
+{% endblock %}

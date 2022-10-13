@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Success{% endblock %}
+{% block header %}
+<h2>Payment Successful</h2>
+{% endblock %}
+{% block content %}
+<div class=" d-flex justify-content-center align-items-center" style="height: 450px ;">
+    <div >
+        <h3>{{ message }}</h3><br>
+        <p style="text-align:center;">Thank you. Please visit our store again!</p><br>
+        <p style="text-align:center;">
+            <a class="btn btn-primary btn-sm" href="/"><i class="fa fa-search" aria- hidden="true"></i> Continue Learning...</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
